@@ -64,6 +64,10 @@ You will need about 400GB to cover the overheads. This can be halved by removing
   pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
 ```
 
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
 ## Authors
 
 [Brendan Griffen](https://www.brendangriffen.com/), 2021.
