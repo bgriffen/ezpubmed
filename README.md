@@ -19,6 +19,7 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 - python
 - numpy
 - matplotlib
+- [ScispaCy](https://allenai.github.io/scispacy/)
 
 ### XML Dataset
 
@@ -63,6 +64,30 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 
   pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
 ```
+
+### NLP
+
+```python
+import scispacy
+import spacy
+
+# Trained models available here: https://allenai.github.io/scispacy/
+
+# en_core_sci_sm       A full spaCy pipeline for biomedical data.
+# en_core_sci_md       ^ with a larger vocabulary and 50k word vectors.
+# en_core_sci_scibert  ^ with ~785k vocabulary and allenai/scibert-base as the transformer model.
+# en_core_sci_lg       ^ with a larger vocabulary and 600k word vectors.
+# en_ner_craft_md      A spaCy NER model trained on the CRAFT corpus(Bada et al., 2011).
+# en_ner_jnlpba_md     ^ trained on the JNLPBA corpus(Collierand  Kim,  2004).
+# en_ner_bc5cdr_md     ^ trained on the BC5CDR corpus (Li  et  al.,2016).
+# en_ner_bionlp13cg_md ^ trained on the BIONLP13CG corpus (Pyysalo et al., 2015).
+
+nlp = spacy.load('en_ner_bionlp13cg_md')
+
+# More coming soon...
+
+```
+https://allenai.github.io/scispacy/
 
 ## License
 
