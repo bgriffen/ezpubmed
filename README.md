@@ -40,25 +40,25 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 ### Update Dataset
 
 ```python
-  import PubMedDataset
+  import pandaspubmed as pp
 
   xml_path = "/path/to/temp/xml/dump/"
 
-  baseline = PubMedDataset(xml_path,"baseline")
+  baseline = pp.Dataset(xml_path,"baseline")
   baseline.update()
 
-  updates = PubMedDataset(xml_path,"updatefiles")
+  updates = pp.Dataset(xml_path,"updatefiles")
   updates.update()
 ```
 
 ### Load Dataset
 
 ```python
-  import PubMedDataset
+  import pandaspubmed as pp
 
   xml_path = "/path/to/temp/xml/dump/"
 
-  pm = PubMedDataset(xml_path)
+  pm = pp.Dataset(xml_path)
   pm.load_papers(year=2021)
 
   pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
