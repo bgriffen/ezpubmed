@@ -9,8 +9,6 @@ Most Pubmed management systems are rather cumbersome, complex and have awkward d
 
 - Simplicity without databases (e.g. SQL)
 - Automatically manages and updates filesystem with latest PubMed archive.
-  - Keep synced with the baseline `ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/`
-  - Keep synced with the updates `ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/`
 - Basic NLP embeddings, analysis using [SpaCy](https://spacy.io/).
 - Simple recommendation engine for generating a 'Paper Digest' periodically.
 
