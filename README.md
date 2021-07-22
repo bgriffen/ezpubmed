@@ -48,5 +48,5 @@ Most Pubmed management systems are rather cumbersome, complex and have awkward d
 
 ## Authors
 
-Brendan Griffen, 2021.
-- [@brendangriffen](https://www.twitter.com/bgriffen)
+[Brendan Griffen](https://www.brendangriffen.com/), 2021.
+-  [@brendangriffen](https://www.twitter.com/bgriffen)
