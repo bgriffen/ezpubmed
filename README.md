@@ -40,7 +40,7 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 ### Update Dataset
 
 ```python
-  import pandaspubmed as pp
+  import pubmedpandas as pp
 
   xml_path = "/path/to/temp/xml/dump/"
 
@@ -54,7 +54,7 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 ### Load Dataset
 
 ```python
-  import pandaspubmed as pp
+  import pubmedpandas as pp
 
   xml_path = "/path/to/temp/xml/dump/"
 
