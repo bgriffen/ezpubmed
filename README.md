@@ -17,10 +17,10 @@ Most Pubmed management systems are rather cumbersome, complex and have awkward d
 
 ## Requirements
 
--- pandas
--- python
--- numpy
--- matplotlib
+- pandas
+- python
+- numpy
+- matplotlib
 
 ### XML Dataset
 
