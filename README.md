@@ -1,7 +1,7 @@
 
 # PubMed Pandas
 
-A basic framework for keeping an up-to-date datastore of PubMed using pandas which can be plugged into various NLP pipelines.
+A basic framework for keeping an up-to-date datastore of PubMed using pandas.
 
 ## Motivation
 
@@ -37,7 +37,7 @@ Most Pubmed management systems are rather cumbersome, complex and have awkward d
 
 ```python
   import PubMedDataset
-  
+
   xml_path = "/path/to/temp/xml/dump/"
 
   pm = PubMedDataset(xml_path)
@@ -46,7 +46,6 @@ Most Pubmed management systems are rather cumbersome, complex and have awkward d
   pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
 ```
 
-  
 ## Authors
 
 Brendan Griffen, 2021.
