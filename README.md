@@ -5,7 +5,7 @@ A basic framework for keeping an up-to-date datastore of PubMed using pandas.
 
 ## Motivation
 
-Most Pubmed management systems are rather cumbersome, complex and have awkward dependencies. Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
+Most PubMed management systems are rather cumbersome, complex and have awkward dependencies. Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
 
 - Simplicity without databases (e.g. SQL)
 - Automatically manages and updates filesystem with latest PubMed archive.
