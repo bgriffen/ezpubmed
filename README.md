@@ -19,7 +19,7 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 - python
 - numpy
 - matplotlib
-- [ScispaCy](https://allenai.github.io/scispacy/)
+- [SciSpaCy](https://allenai.github.io/scispacy/)
 
 ### XML Dataset
 
@@ -87,7 +87,7 @@ nlp = spacy.load('en_ner_bionlp13cg_md')
 # More coming soon...
 
 ```
-https://allenai.github.io/scispacy/
+
 
 ## License
 
