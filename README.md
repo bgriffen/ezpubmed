@@ -1,14 +1,25 @@
 
 # PubMed Pandas
 
-A basic framework for keeping an up-to-date datastore of PubMed using pandas.
+A basic framework for keeping an up-to-date datastore of PubMed in a format that can be easily turned into a pandas dataframe for analysis.
 
 ## Motivation
 
-Most PubMed management systems are rather cumbersome, complex and have awkward dependencies. Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
+Most PubMed management systems are rather cumbersome, complex and have awkward dependencies (e.g. setting up a server). Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
 
 - Simplicity.
 - Automatically manages and updates with latest PubMed archive.
+
+### XML Dataset
+
+- Baseline: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/`
+- Daily: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/`
+
+## Approach
+
+1. The XML files from the PubMed archive are compared to what you have locally and downloaded where needed.
+2. These are then inserted into the `papers.db` SQLite database file using peewee (a light ORM).
+3. This can then be queried and converted into a dataframe with ease. Helper functions (e.g. `load_year(2021)`) are being developed over time to avoid any need for SQL knowledge, though the whole point of peewee is to abstract that away anyway.
 
 ## Requirements
 
@@ -20,18 +31,14 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 - [SciSpaCy](https://allenai.github.io/scispacy/)
 - [pubmed_parser](https://github.com/titipata/pubmed_parser)
 
-### XML Dataset
-
-- Baseline: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/`
-- Daily: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/`
-
 ### Storage Requirements
 
-You will need about 400GB to cover the overheads. This can be halved by removing XML files once they have been inserted into the dataframe.
+You will need about 300GB to cover the overheads. 
 
 ```bash
 255G  baseline      # XML files
-71G   updatefiles   # XML files (size as of 2021-07-22 but will grow over the year)
+71G   updatefiles   # XML files (size as of 2021-07-22)
+70G   papers.db     # sqlite database
 ```
 
 ## Usage
