@@ -159,5 +159,4 @@ nlp = spacy.load('en_ner_bionlp13cg_md')
 
 ## Authors
 
-[Brendan Griffen](https://www.brendangriffen.com/), 2021.
--  [@brendangriffen](https://www.twitter.com/bgriffen)
+[Brendan Griffen](https://www.brendangriffen.com/) ([@brendangriffen](https://www.twitter.com/bgriffen)), 2021.
