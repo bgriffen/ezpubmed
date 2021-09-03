@@ -36,7 +36,7 @@ A direct pandas handling of this can be done and actually if you look at early c
 - [`scispacy==0.2.5`](https://allenai.github.io/scispacy/)
 - [`pubmed_parser==0.2.2`](https://github.com/titipata/pubmed_parser)
 
-```
+
 ### Storage Requirements
 
 You will need about 300GB to cover the overheads. 
