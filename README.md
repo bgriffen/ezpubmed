@@ -130,6 +130,8 @@ Note: `pubyear`,`pubmonth`,`pubday` are built in extensions of `pubdate` that ar
 
 ### NLP
 
+Note: work in progress.
+
 ```python
 import scispacy
 import spacy
@@ -150,7 +152,6 @@ nlp = spacy.load('en_ner_bionlp13cg_md')
 # More coming soon...
 
 ```
-
 
 ## License
 
