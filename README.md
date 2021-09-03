@@ -1,5 +1,5 @@
 
-# ezPubmed
+# ezpubmed
 
 A basic framework for keeping an up-to-date datastore of PubMed in a format that can be easily turned into a pandas dataframe for analysis.
 
