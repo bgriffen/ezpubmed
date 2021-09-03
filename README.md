@@ -61,9 +61,9 @@ papers_db = data_path + 'papers.db'
 and then running `main.py`. Note, the first time you run this it will take a few days to download PubMed and populate the database.
 
 ```python
-import pubmedpandas as pp
+import ezpubmed as pp
   
-p = pp.PubMedPandas()
+p = pp.EzPubMed()
 p.update_db()
 ```
 
@@ -83,9 +83,9 @@ Processing: pubmed21n0001.xml (0.00 complete)
 Once the `update_db` has been run at least once, you can then obtain your data in pandas format simply as follows:
 
 ```python
-import pubmedpandas as pp
-
-p = pp.PubMedPandas()
+import ezpubmed as pp
+  
+p = pp.EzPubMed()
 p.load_year(1970)
 p.papers     # pandas dataframe holding title, abstract etc.
 ```
@@ -95,9 +95,9 @@ p.papers     # pandas dataframe holding title, abstract etc.
 If the basic queries (`load_year` etc.) are not sufficient, various manipulations can be found [here](https://docs.peewee-orm.com/en/latest/peewee/querying.html#filtering-records). These can be done directly on the database (`dbase`). An example you might want all the papers from February:
 
 ```python
-import pubmedpandas as pp
-
-p = pp.PubMedPandas()
+import ezpubmed as pp
+  
+p = pp.EzPubMed()
 
 # Query all papers published in the month of February
 q = db.PaperDB.select().where(db.PaperDB.pubmonth == 2) 

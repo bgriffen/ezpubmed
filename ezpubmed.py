@@ -59,7 +59,7 @@ class Dataset:
             self.xml_done = pd.DataFrame(columns=['Filename'])
 
     def update_db(self,current_pmids):
-        
+
         self.get_completed_list()
         self.xml_files = sorted(pubmed_parser.list_xml_path(self.xml_path))
         self.xml_update = [f for f in self.xml_files if f not in list(self.xml_done['Filename'])]
@@ -145,7 +145,7 @@ class Dataset:
             sub.call(["gunzip " + filei],shell=True)
         self.xml_files = utils.get_list_of_xml_files(self.xml_path)
 
-class PubMedPandas():
+class EzPubMed():
     def __init__(self):
 
         if ~os.path.exists(config.papers_db):
