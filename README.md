@@ -27,14 +27,14 @@ A direct pandas handling of this can be done and actually if you look at early c
 
 ## Requirements
 
-- pandas
-- python
-- numpy
-- matplotlib
-- [peewee](https://github.com/coleifer/peewee)
-- [SciSpaCy](https://allenai.github.io/scispacy/)
-- [pubmed_parser](https://github.com/titipata/pubmed_parser)
+- `pandas==1.0.5`
+- `python==3.8`
+- `numpy==1.18.5`
+- [`peewee==3.13.3`](https://github.com/coleifer/peewee)
+- [`scispacy==0.2.5`](https://allenai.github.io/scispacy/)
+- [`pubmed_parser==0.2.2`](https://github.com/titipata/pubmed_parser)
 
+```
 ### Storage Requirements
 
 You will need about 300GB to cover the overheads. 
