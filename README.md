@@ -12,13 +12,17 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 
 ### XML Dataset
 
+PubMed published as baseline which is basically all papers up until the current year in one area (i.e. `baseline`) and all the papers of the current year elsewhere. What is also intermixed in the papers of this year (i.e. `updatefiles`) are not just the new papers, but updates to pre-existing files that exist in the baseline. 
+
 - Baseline: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/`
 - Daily: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/`
+
+A direct pandas handling of this can be done and actually if you look at early commits was what was done but owing to how simple it is to maintain a sqlite db in `peewee`, that was found to be the best path forward. [peewee](https://github.com/coleifer/peewee) is a great ORM databsae tool and allows going between `datastore <--> dataframe` very efficiently. You the user don't even need to know any SQL to make use of the dataset, overcoming one of the major hurdles to accessing PubMed data (though it is there for those that want to tinker, see below).
 
 ## Approach
 
 1. The XML files from the PubMed archive are compared to what you have locally and downloaded where needed.
-2. These are then inserted into the `papers.db` SQLite database file using peewee (a light ORM).
+2. These are then inserted into the `papers.db` SQLite database file using `peewee` (a light ORM).
 3. This can then be queried and converted into a dataframe with ease. Helper functions (e.g. `load_year(2021)`) are being developed over time to avoid any need for SQL knowledge, though the whole point of peewee is to abstract that away anyway.
 
 ## Requirements
