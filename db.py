@@ -36,13 +36,13 @@ def get_db():
     return db
 
 def reset_db():
-    db = get_db(config.papers_db)
+    db = get_db()
     db.drop_tables([PaperDB])
     db.create_tables([PaperDB])
     return db
 
 def create_db():
-    db = get_db(config.papers_db)
+    db = get_db()
     db.create_tables([PaperDB])
     return db
 
@@ -50,7 +50,7 @@ class BaseModel(pw.Model):
     """A base model that will use our MySQL database"""
 
     class Meta:
-       database = get_db(config.papers_db) 
+       database = get_db() 
     pass
 
 class PaperDB(BaseModel):
