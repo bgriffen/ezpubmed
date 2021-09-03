@@ -1,6 +1,6 @@
 
-import multiprocessing as mp
-from joblib import Parallel, delayed
+#import multiprocessing as mp
+#from joblib import Parallel, delayed
 
 import pandas as pd
 import pylab as plt
@@ -8,15 +8,13 @@ import numpy as np
 import subprocess as sub
 import sys,os,glob
 import re
+import time
 
 import pubmed_parser
 import utils
 import ftplib
-import utils_nlp
 import config
 import db
-import numpy as np
-import time
 
 _start_time = time.time()
 
@@ -61,6 +59,7 @@ class Dataset:
             self.xml_done = pd.DataFrame(columns=['Filename'])
 
     def update_db(self,current_pmids):
+        
         self.get_completed_list()
         self.xml_files = sorted(pubmed_parser.list_xml_path(self.xml_path))
         self.xml_update = [f for f in self.xml_files if f not in list(self.xml_done['Filename'])]
@@ -174,9 +173,6 @@ class PubMedPandas():
         self.baseline.update_db(self.current_pmids)
         self.updates.update_db(self.current_pmids)
         tac("UPDATE COMPLETE")
-
-    def update_embeds(self,years):
-        utils_nlp.update_embeddings(years=years)
 
     def load_year(self,year):
         q = db.PaperDB.select().where(db.PaperDB.pubyear == year) 
