@@ -53,11 +53,8 @@ Note, owing to [issues with writing mixtype data to HDF5](https://stackoverflow.
 ```python
   import pubmedpandas as pp
 
-  xml_path = "/path/to/temp/xml/dump/"
-
-  pm = pp.Dataset(xml_path)
-  pm.load_papers(year=2021)
-
+  p = pp.PubMedPandas()
+  p.load_year(1970)
   pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
 ```
 
