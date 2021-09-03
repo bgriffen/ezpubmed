@@ -68,7 +68,7 @@ def parse_dates(datei):
     return dateparser.parse(datei,date_formats=['%Y-%m-%d','%Y-%m','%Y'])
 
 def prepare_papers(papers):
-    print('> Preparing papers...')
+    print('  > Preparing papers...')
     papers['pmid'] = papers['pmid'].astype("int32")
     papers.drop_duplicates(subset='pmid',inplace=True)
     papers['abstract'].replace('', np.nan, inplace=True)
@@ -77,10 +77,10 @@ def prepare_papers(papers):
     return papers
 
 def append_dateinfo(papers):
-    print('> Parsing dates...')
+    print('  > Parsing dates...')
     papers['pubdate'] = papers['pubdate'].apply(parse_dates)
     papers = papers.sort_values('pubdate')
-    print("> Creating year-month-day entries...")
+    print("  > Creating year-month-day entries...")
     papers['pubyear'] = papers['pubdate'].apply(lambda x: x.year)
     papers['pubmonth'] = papers['pubdate'].apply(lambda x: x.month)
     papers['pubday'] = papers['pubdate'].apply(lambda x: x.day)
