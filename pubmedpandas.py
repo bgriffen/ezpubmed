@@ -75,7 +75,7 @@ class Dataset:
         num_to_be_processed = len(self.xml_update)
         for paperi,xml in enumerate(self.xml_update):
             print()
-            print("Processing: %s (%3.2f completed)" % (os.path.basename(xml),paperi*100/num_to_be_processed))
+            print("Processing: %s (%3.2f complete)" % (os.path.basename(xml),paperi*100/num_to_be_processed))
             documents = pubmed_parser.parse_medline_xml(xml,year_info_only=False,reference_list=True)
             df = pd.DataFrame(documents)
             df = utils.prepare_papers(df)
@@ -95,18 +95,18 @@ class Dataset:
             num_papers_new = len(self.new_l)
             num_papers = df.shape[0]
 
-            print("> # Papers:",num_papers)
+            print(" > # Papers:",num_papers)
 
             if num_papers_new != 0:
                 n_batch = 5000
-                print("  >> Inserting %5i (%3.2f) papers into database." % (num_papers_new,num_papers_new*100/num_papers))
+                print("    >> Inserting %5i (%3.2f of XML) papers into database." % (num_papers_new,num_papers_new*100/num_papers))
                 with self.dbase.atomic():
                     for idx in range(0, num_papers_new, n_batch):
-                        print("    >>> Inserted %5i papers" % (idx+n_batch))
+                        print("       >>> Inserted %5i papers" % (idx+n_batch))
                         db.PaperDB.insert_many(self.new_l[idx:idx+n_batch]).execute()
 
             if num_papers_update != 0:
-                print("  >> Updating %5i (%3.2f) papers into database." % (num_papers_update,num_papers_update*100/num_papers))
+                print("    >> Updating %5i (%3.2f) papers into database." % (num_papers_update,num_papers_update*100/num_papers))
                 updates = []
                 for u in self.update_l:
                     e = db.PaperDB(**u)
