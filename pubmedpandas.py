@@ -25,7 +25,6 @@ class Dataset:
         self.dbase = dbase
         self.datatype = datatype
         self.xml_path = work_path + "pubmed_data/%s/xml/"%datatype
-        self.hdf_file = work_path+ "pubmed_data/%s.h5"%(datatype)
 
         self.dbtracking_path = config.data_path+"updates_so_far_%s.csv" % datatype
         self.pubmed_ftp = r'ftp.ncbi.nlm.nih.gov'
