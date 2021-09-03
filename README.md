@@ -45,7 +45,7 @@ You will need about 300GB to cover the overheads.
 70G   papers.db     # sqlite database
 ```
 
-## Usage
+## Getting Started
 
 ### Create/Update Dataset
 
