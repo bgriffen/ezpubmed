@@ -51,14 +51,20 @@ You will need about 300GB to cover the overheads.
 
 ### Create/Update Dataset
 
-You can get going immediately by simply running `main.py`. Note, the first time you run this it will take a few days to download PubMed and populate the database.
+You can get going immediately by simply setting your paths in `config.py`,
+
+```python
+data_path = r'/path/to/data/'
+papers_db = data_path + 'papers.db'
+```
+
+and then running `main.py`. Note, the first time you run this it will take a few days to download PubMed and populate the database.
 
 ```python
 import pubmedpandas as pp
   
 p = pp.PubMedPandas()
 p.update_db()
-
 ```
 
 You should see the following output per file once the download component is done.
