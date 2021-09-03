@@ -86,7 +86,9 @@ If the basic queries (`load_year` etc.) are not sufficient, various manipulation
 import pubmedpandas as pp
 
 p = pp.PubMedPandas()
-q = db.PaperDB.select().where(db.PaperDB.pubmonth == 2) # all papers in February
+
+# Query all papers published in the month of February
+q = db.PaperDB.select().where(db.PaperDB.pubmonth == 2) 
 
 # If you would like a pandas dataframe, simply use:
 papers = pd.DataFrame(list(q.dicts()))
