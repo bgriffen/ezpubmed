@@ -62,7 +62,7 @@ Note, owing to [issues with writing mixtype data to HDF5](https://stackoverflow.
 
   p = pp.PubMedPandas()
   p.load_year(1970)
-  pm.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
+  p.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
 ```
 
 ### NLP
