@@ -84,7 +84,7 @@ class Dataset:
             lpmids = list(df['pmid'])
 
             # split into papers that are new vs. to-be-updated
-            self.update_pmid = intersection(lpmids,current_pmids)
+            self.update_pmid = utils.intersection(lpmids,current_pmids)
             self.new_pmid = np.setdiff1d(lpmids,current_pmids)
             dfi = df.set_index("pmid")
             self.new_l = dfi.loc[self.new_pmid].reset_index().to_dict('records')
@@ -165,7 +165,7 @@ class PubMedPandas():
         if dfq.shape[0] != 0:
             self.current_pmids = list(dfq['pmid'])
 
-        print("Downloading latest data...")
+        print("Downloading latest data (if needed)...")
         self.baseline.download_latest()
         self.updates.download_latest()
 
