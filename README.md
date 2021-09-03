@@ -7,11 +7,8 @@ A basic framework for keeping an up-to-date datastore of PubMed using pandas.
 
 Most PubMed management systems are rather cumbersome, complex and have awkward dependencies. Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
 
-- Simplicity without databases (e.g. SQL)
-- Automatically manages and updates filesystem with latest PubMed archive.
-- Basic NLP embeddings, analysis using [SpaCy](https://spacy.io/).
-- Simple recommendation engine for generating a 'Paper Digest' periodically.
-
+- Simplicity.
+- Automatically manages and updates with latest PubMed archive.
 
 ## Requirements
 
@@ -19,7 +16,9 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 - python
 - numpy
 - matplotlib
+- [peewee](https://github.com/coleifer/peewee)
 - [SciSpaCy](https://allenai.github.io/scispacy/)
+- [pubmed_parser](https://github.com/titipata/pubmed_parser)
 
 ### XML Dataset
 
@@ -33,7 +32,6 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 ```bash
 255G  baseline      # XML files
 71G   updatefiles   # XML files (size as of 2021-07-22 but will grow over the year)
-25G   papers.parq   # also broken down by year, 2021.parq, 2020.parq etc.
 ```
 
 ## Usage
@@ -42,17 +40,15 @@ You will need about 400GB to cover the overheads. This can be halved by removing
 
 ```python
   import pubmedpandas as pp
+  
+  p = pp.PubMedPandas()
+  p.update_db()
 
-  xml_path = "/path/to/temp/xml/dump/"
-
-  baseline = pp.Dataset(xml_path,"baseline")
-  baseline.update()
-
-  updates = pp.Dataset(xml_path,"updatefiles")
-  updates.update()
 ```
 
 ### Load Dataset
+
+Note, owing to [issues with writing mixtype data to HDF5](https://stackoverflow.com/questions/57078803/overflowerror-while-saving-large-pandas-df-to-hdf), the papers are stored in parquet format and vectors in HDF5.
 
 ```python
   import pubmedpandas as pp
