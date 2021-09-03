@@ -134,14 +134,15 @@ class Dataset:
 class PubMedPandas():
     def __init__(self):
         
-        self.baseline = Dataset(config.data_path,"baseline",self.dbase)
-        self.updates = Dataset(config.data_path,"updatefiles",self.dbase)
-
-    def update_db(self):
         if ~os.path.exists(config.papers_db):
             self.dbase = db.create_db()
         else:
             self.dbase = db.get_db()
+
+        self.baseline = Dataset(config.data_path,"baseline",self.dbase)
+        self.updates = Dataset(config.data_path,"updatefiles",self.dbase)
+
+    def update_db(self):
 
         print("Getting current pmids...")        
         q = db.PaperDB.select(db.PaperDB.pmid) 
