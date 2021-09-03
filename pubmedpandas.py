@@ -16,6 +16,20 @@ import utils_nlp
 import config
 import db
 import numpy as np
+import time
+
+_start_time = time.time()
+
+def tic():
+    global _start_time
+    _start_time = time.time()
+
+def tac(method):
+    t_sec = time.time() - _start_time
+    (t_min, t_sec) = divmod(t_sec,60)
+    (t_hour,t_min) = divmod(t_min,60)
+    rstr  = '[ TIMER ]: %30s - %2ihour:%2imin:%3.2fsec' % (method,t_hour,t_min,t_sec)
+    print(rstr)
 
 class Dataset:
     def __init__(self,work_path,datatype,dbase):
@@ -133,7 +147,7 @@ class Dataset:
 
 class PubMedPandas():
     def __init__(self):
-        
+
         if ~os.path.exists(config.papers_db):
             self.dbase = db.create_db()
         else:
@@ -143,11 +157,13 @@ class PubMedPandas():
         self.updates = Dataset(config.data_path,"updatefiles",self.dbase)
 
     def update_db(self):
-
+        tic()
         print("Getting current pmids...")        
         q = db.PaperDB.select(db.PaperDB.pmid) 
         dfq = pd.DataFrame(list(q.dicts()))
-        self.current_pmids = list(dfq['pmid'])
+        self.current_pmids = []
+        if dfq.shape[0] != 0:
+            self.current_pmids = list(dfq['pmid'])
 
         print("Downloading latest data...")
         self.baseline.download_latest()
@@ -156,6 +172,7 @@ class PubMedPandas():
         print("Updating database...")
         self.baseline.update_db(self.current_pmids)
         self.updates.update_db(self.current_pmids)
+        tac("UPDATE COMPLETE")
 
     def update_embeds(self,years):
         utils_nlp.update_embeddings(years=years)
