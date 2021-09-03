@@ -1,5 +1,5 @@
-import pubmedpandas as pp
+import ezpubmed as ez
 
 if __name__ == '__main__':
-    p = pp.PubMedPandas()
+    p = ez.PubMedPandas()
     p.update_db()
