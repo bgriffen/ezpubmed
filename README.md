@@ -72,7 +72,7 @@ Processing: pubmed21n0001.xml (0.00 complete)
 
 ### Load Dataset
 
-Note, owing to [issues with writing mixtype data to HDF5](https://stackoverflow.com/questions/57078803/overflowerror-while-saving-large-pandas-df-to-hdf), the papers are stored in parquet format and vectors in HDF5.
+Once the `update_db` has been run at least once, you can then obtain your data in pandas format simply as follows:
 
 ```python
 import pubmedpandas as pp
@@ -82,9 +82,9 @@ p.load_year(1970)
 p.papers     # pandas dataframe holding title, abstract etc.
 ```
 
-### Interact with DB via peewee
+### Customized queries via peewee
 
-If the basic queries (`load_year` etc.) are not sufficient, various manipulations can be found [here](https://docs.peewee-orm.com/en/latest/peewee/querying.html#filtering-records). For example you might want all the papers from February:
+If the basic queries (`load_year` etc.) are not sufficient, various manipulations can be found [here](https://docs.peewee-orm.com/en/latest/peewee/querying.html#filtering-records). These can be done directly on the database (`dbase`). An example you might want all the papers from February:
 
 ```python
 import pubmedpandas as pp
@@ -99,7 +99,7 @@ papers = pd.DataFrame(list(q.dicts()))
 
 ```
 
-Other variables to query can be found via `db.fields`. For convenience, these are as follows:
+Other variables to query can be found via `db.fields`, though use some of the peewee docs as a guide if you're going this way. For convenience, the other fields can be found below ([NIH data information](https://www.nlm.nih.gov/bsd/mms/medlineelements.html) if curious).
 
 ```python
 fields = ['pmid',
