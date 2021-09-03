@@ -43,14 +43,27 @@ You will need about 300GB to cover the overheads.
 
 ## Usage
 
-### Update Dataset
+### Create/Update Dataset
+
+You can get going immediately by simply running `main.py`. Note, the first time you run this it will take a few days to download PubMed and populate the database.
 
 ```python
-  import pubmedpandas as pp
+import pubmedpandas as pp
   
-  p = pp.PubMedPandas()
-  p.update_db()
+p = pp.PubMedPandas()
+p.update_db()
 
+```
+
+You should see the following output per file once the download component is done.
+
+```bash
+Processing: pubmed21n0001.xml (0.00 complete)
+  > Preparing papers...
+  > Parsing dates...
+  > Creating year-month-day entries...
+  > # Papers: 15377
+    >> Updating 15377 (100.00) papers into database.
 ```
 
 ### Load Dataset
@@ -58,11 +71,11 @@ You will need about 300GB to cover the overheads.
 Note, owing to [issues with writing mixtype data to HDF5](https://stackoverflow.com/questions/57078803/overflowerror-while-saving-large-pandas-df-to-hdf), the papers are stored in parquet format and vectors in HDF5.
 
 ```python
-  import pubmedpandas as pp
+import pubmedpandas as pp
 
-  p = pp.PubMedPandas()
-  p.load_year(1970)
-  p.papers     # pandas dataframe holding title, abstract, authors, affiliations etc.
+p = pp.PubMedPandas()
+p.load_year(1970)
+p.papers     # pandas dataframe holding title, abstract etc.
 ```
 
 ### NLP
