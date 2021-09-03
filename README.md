@@ -78,6 +78,50 @@ p.load_year(1970)
 p.papers     # pandas dataframe holding title, abstract etc.
 ```
 
+### Interact with DB via peewee
+
+If the basic queries (`load_year` etc.) are not sufficient, various manipulations can be found [here](https://docs.peewee-orm.com/en/latest/peewee/querying.html#filtering-records). For example you might want all the papers from February:
+
+```python
+import pubmedpandas as pp
+
+p = pp.PubMedPandas()
+q = db.PaperDB.select().where(db.PaperDB.pubmonth == 2) # all papers in February
+
+# If you would like a pandas dataframe, simply use:
+papers = pd.DataFrame(list(q.dicts()))
+
+```
+
+Other variables to query can be found via `db.fields`. For convenience, these are as follows:
+
+```python
+fields = ['pmid',
+          'title', 
+          'abstract', 
+          'journal', 
+          'authors', 
+          'pubdate', 
+          'mesh_terms',
+          'publication_types', 
+          'chemical_list', 
+          'keywords', 
+          'doi', 
+          'delete',
+          'affiliations', 
+          'pmc', 
+          'other_id', 
+          'medline_ta', 
+          'nlm_unique_id',
+          'issn_linking', 
+          'country', 
+          'pubyear', 
+          'pubmonth',
+          'pubday']
+```
+
+Note: `pubyear`,`pubmonth`,`pubday` are built in extensions of `pubdate` that are created during the `p.update_db()` process to enhance time-based queries.
+
 ### NLP
 
 ```python
