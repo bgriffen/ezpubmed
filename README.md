@@ -102,9 +102,7 @@ p.papers     # pandas dataframe holding title, abstract etc.
 If the basic queries (`load_year` etc.) are not sufficient, various manipulations can be found [here](https://docs.peewee-orm.com/en/latest/peewee/querying.html#filtering-records). These can be done directly on the database (`dbase`). An example you might want all the papers from February:
 
 ```python
-import ezpubmed as pp
-  
-p = pp.EzPubMed()
+from ezpubmed import db
 
 # Query all papers published in the month of February
 q = db.PaperDB.select().where(db.PaperDB.pubmonth == 2) 
