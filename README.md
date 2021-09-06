@@ -12,7 +12,7 @@ Most PubMed management systems are rather cumbersome, complex and have awkward d
 - Simplicity.
 - Automatically manage and update your local store to the latest PubMed archive.
 
-### Data Ingest
+## Data Ingest
 
 PubMed publishes two core datasets:
 
@@ -30,9 +30,11 @@ A direct `pandas` handling of this can be done and actually if you look at early
 
 1. The XML files from the PubMed archive are compared to what you have locally and downloaded where needed (essentially syncing with the FTP).
 2. New papers are inserted into the `papers.db` SQLite database file using `peewee`. Papers with metadata to be updated are also updated in the database during the update phase.
-3. Helper functions (e.g. `load_year(2021)`) then load the relevant dataframe for downstream use. These are being developed over time to avoid any need for SQL knowledge and keep it fairly pythonic.
+3. Helper functions in `utils_pubs` can then load the relevant dataframe for downstream use. New additions are welcome. =)
 
 ## Requirements
+
+### Packages
 
 - `pandas>=1.0.5`
 - `python>=3.8`
@@ -41,7 +43,7 @@ A direct `pandas` handling of this can be done and actually if you look at early
 - [`pubmed_parser>=0.2.2`](https://github.com/titipata/pubmed_parser)
 - [`scispacy==0.2.5`](https://allenai.github.io/scispacy/)
 
-### Storage Requirements
+### Storage 
 
 You will need about 400GB to cover the overheads. Work is being done to reduce this to just retain the `papers.db` and updating the XML files where needed and deleting once done.
 
@@ -80,6 +82,7 @@ Processing: pubmed21n0001.xml (0.00 complete)
   > Creating year-month-day entries...
   > # Papers: 15377
     >> Updating 15377 (100.00) papers into database.
+...
 ```
 
 ### Load Dataset

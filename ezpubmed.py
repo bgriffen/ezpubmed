@@ -12,6 +12,7 @@ import time
 
 import pubmed_parser
 import utils
+import utils_pubs as utilsp
 import ftplib
 import config
 import db
@@ -175,9 +176,7 @@ class EzPubMed():
         tac("UPDATE COMPLETE")
 
     def load_year(self,year):
-        q = db.PaperDB.select().where(db.PaperDB.pubyear == year) 
-        self.papers = pd.DataFrame(list(q.dicts()))
+        self.papers = utilsp.load_year(year,self.dbase)
 
     def load_all(self):
-        q = db.PaperDB.select()
-        self.papers = pd.DataFrame(list(q.dicts()))
+        self.papers = utilsp.load_all(self.dbase)
