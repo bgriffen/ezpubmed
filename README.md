@@ -7,44 +7,48 @@ A basic framework for keeping an up-to-date datastore of PubMed in a format that
 
 ## Motivation
 
-Most PubMed management systems are rather cumbersome, complex and have awkward dependencies (e.g. setting up a server). Stripping it all back to core Python libraries eases data access and enables data science minded people to immediately obtain an up-to-date, structured dataframe from the get go. General guiding principles are as follows:
+Most PubMed management systems are rather cumbersome, complex and have awkward dependencies (e.g. setting up a server). The goal here is to prioritize two features.
 
 - Simplicity.
-- Automatically manages and updates with latest PubMed archive.
+- Automatically manage and update your local store to the latest PubMed archive.
 
-### XML Dataset
+### Data Ingest
 
-PubMed published as baseline which is basically all papers up until the current year in one area (i.e. `baseline`) and all the papers of the current year elsewhere. What is also intermixed in the papers of this year (i.e. `updatefiles`) are not just the new papers, but updates to pre-existing files that exist in the baseline. 
+PubMed publishes two core datasets:
+
+* `baseline` are all papers up until the current year (e.g. 1900-2020)
+* `updatefiles` are all the papers of the current year AND corrections to the baseline
+
+These datasets are found at the following FTPs:
 
 - Baseline: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/`
 - Daily: `ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/`
 
-A direct pandas handling of this can be done and actually if you look at early commits was what was done but owing to how simple it is to maintain a sqlite db in `peewee`, that was found to be the best path forward. [peewee](https://github.com/coleifer/peewee) is a great ORM databsae tool and allows going between `datastore <--> dataframe` very efficiently. You the user don't even need to know any SQL to make use of the dataset, overcoming one of the major hurdles to accessing PubMed data (though it is there for those that want to tinker, see below).
+A direct `pandas` handling of this can be done and actually if you look at early commits was what was done but owing to how simple it is to maintain a SQLite DB in [`peewee`](https://github.com/coleifer/peewee), that was found to be the best path forward.
 
-## Approach
+## Data Management
 
-1. The XML files from the PubMed archive are compared to what you have locally and downloaded where needed.
-2. These are then inserted into the `papers.db` SQLite database file using `peewee` (a light ORM).
-3. This can then be queried and converted into a dataframe with ease. Helper functions (e.g. `load_year(2021)`) are being developed over time to avoid any need for SQL knowledge, though the whole point of peewee is to abstract that away anyway.
+1. The XML files from the PubMed archive are compared to what you have locally and downloaded where needed (essentially syncing with the FTP).
+2. New papers are inserted into the `papers.db` SQLite database file using `peewee`. Papers with metadata to be updated are also updated in the database during the update phase.
+3. Helper functions (e.g. `load_year(2021)`) then load the relevant dataframe for downstream use. These are being developed over time to avoid any need for SQL knowledge and keep it fairly pythonic.
 
 ## Requirements
 
-- `pandas==1.0.5`
-- `python==3.8`
-- `numpy==1.18.5`
-- [`peewee==3.13.3`](https://github.com/coleifer/peewee)
+- `pandas>=1.0.5`
+- `python>=3.8`
+- `numpy>=1.18.5`
+- [`peewee>=3.13.3`](https://github.com/coleifer/peewee)
+- [`pubmed_parser>=0.2.2`](https://github.com/titipata/pubmed_parser)
 - [`scispacy==0.2.5`](https://allenai.github.io/scispacy/)
-- [`pubmed_parser==0.2.2`](https://github.com/titipata/pubmed_parser)
-
 
 ### Storage Requirements
 
-You will need about 300GB to cover the overheads. 
+You will need about 400GB to cover the overheads. Work is being done to reduce this to just retain the `papers.db` and updating the XML files where needed and deleting once done.
 
 ```bash
 255G  baseline      # XML files
 71G   updatefiles   # XML files (size as of 2021-07-22)
-70G   papers.db     # sqlite database
+70G   papers.db     # Full SQLite database
 ```
 
 ## Getting Started
