@@ -73,6 +73,7 @@ class Dataset:
             print(f)
 
         num_to_be_processed = len(self.xml_update)
+        current_xml_list = list(self.xml_done['Filename'])
         for paperi,xml in enumerate(self.xml_update):
             print()
             print("Processing: %s (%3.2f complete)" % (os.path.basename(xml),paperi*100/num_to_be_processed))
@@ -117,9 +118,11 @@ class Dataset:
 
             current_pmids.extend(lpmids)
 
-        print("Saving the completed list...")
-        self.dbtracking_df = pd.DataFrame(list(self.xml_done['Filename']) + self.xml_update,columns=['Filename'])
-        self.dbtracking_df.to_csv(self.dbtracking_path)
+            print("Saving the completed list...")
+            current_xml_list.append(xml)
+            self.dbtracking_df = pd.DataFrame(current_xml_list,columns=['Filename'])
+            self.dbtracking_df.to_csv(self.dbtracking_path)
+        
         print("UPDATE COMPLETE!")
 
     def download_latest(self):
