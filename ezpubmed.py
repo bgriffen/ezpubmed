@@ -118,7 +118,7 @@ class Dataset:
 
             current_pmids.extend(lpmids)
 
-            print("Saving the completed list...")
+            print("Adding filename to completed list...")
             current_xml_list.append(xml)
             self.dbtracking_df = pd.DataFrame(current_xml_list,columns=['Filename'])
             self.dbtracking_df.to_csv(self.dbtracking_path)
