@@ -72,7 +72,7 @@ def prepare_papers(papers):
     papers['pmid'] = papers['pmid'].astype("int32")
     papers.drop_duplicates(subset='pmid',inplace=True)
     papers['abstract'].replace('', np.nan, inplace=True)
-    papers.dropna(subset=['pmid','abstract'], inplace=True)
+    papers.dropna(subset=['pmid','abstract','pubdate'], inplace=True)
     #papers.papers['title'].str.contains("Errata")
     return papers
 

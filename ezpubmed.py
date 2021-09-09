@@ -82,15 +82,15 @@ class Dataset:
             df = utils.prepare_papers(df)
             df = utils.append_dateinfo(df)[self.cols]
             df = utils.fix_dtypes(df)
-            df.dropna(subset=['pmid'],inplace=True)
+            df.dropna(subset=['pmid','abstract','pubdate'],inplace=True)
             lpmids = list(df['pmid'])
 
             # split into papers that are new vs. to-be-updated
             self.update_pmid = utils.intersection(lpmids,current_pmids)
             self.new_pmid = np.setdiff1d(lpmids,current_pmids)
-            dfi = df.set_index("pmid")
-            self.new_l = dfi.loc[self.new_pmid].reset_index().to_dict('records')
-            self.update_l = dfi.loc[self.update_pmid].reset_index().to_dict('records')
+            self.dfi = df.set_index("pmid")
+            self.new_l = self.dfi.loc[self.new_pmid].reset_index().to_dict('records')
+            self.update_l = self.dfi.loc[self.update_pmid].reset_index().to_dict('records')
 
             num_papers_update = len(self.update_l)
             num_papers_new = len(self.new_l)
@@ -108,13 +108,13 @@ class Dataset:
 
             if num_papers_update != 0:
                 print("    >> Updating %5i (%3.2f) papers into database." % (num_papers_update,num_papers_update*100/num_papers))
-                updates = []
+                self.update_instances = []
                 for u in self.update_l:
                     e = db.PaperDB(**u)
-                    updates.append(e)
+                    self.update_instances.append(e)
 
                 with self.dbase.atomic():
-                    db.PaperDB.bulk_update(updates,fields=self.cols, batch_size=1000)
+                    db.PaperDB.bulk_update(self.update_instances,fields=self.cols, batch_size=1000)
 
             current_pmids.extend(lpmids)
 
