@@ -103,7 +103,7 @@ class Dataset:
                 print("    >> Inserting %5i (%3.2f of XML) papers into database." % (num_papers_new,num_papers_new*100/num_papers))
                 with self.dbase.atomic():
                     for idx in range(0, num_papers_new, n_batch):
-                        print("       >>> Inserted %5i papers" % (idx+n_batch))
+                        print("       >>> Inserted batch of %5i papers" % (idx+n_batch))
                         db.PaperDB.insert_many(self.new_l[idx:idx+n_batch]).execute()
 
             if num_papers_update != 0:
