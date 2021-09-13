@@ -1,8 +1,7 @@
 import pandas as pd
 import datetime
+
 today = datetime.date.today()
-
-
 
 def load_today(db):
     q = db.PaperDB.select().where(db.PaperDB.pubdate==today)
