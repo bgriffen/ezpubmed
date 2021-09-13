@@ -1,10 +1,36 @@
 import pandas as pd
+import datetime
+today = datetime.date.today()
+
+
+
+def load_today(db):
+    q = db.PaperDB.select().where(db.PaperDB.pubdate==today)
+    df = pd.DataFrame(list(z.dicts()))
+    return df
+
+def load_this_week(db):
+    delta = today - datetime.timedelta(days=8)
+    q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
+    df = pd.DataFrame(list(z.dicts()))
+    return df
+
+def load_this_month(db):
+    delta = today - datetime.timedelta(days=31)
+    q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
+    df = pd.DataFrame(list(z.dicts()))
+    return df
 
 def load_year(db,year):
     q = db.PaperDB.select().where(db.PaperDB.pubyear == year) 
     papers = pd.DataFrame(list(q.dicts()))
     return papers
 
+load between_years(db,y1,y2):
+    z = db.PaperDB.select().where(db.PaperDB.pubyear.between(y1,y2))
+    df = list(z.dicts())
+    return df
+    
 def load_all(db):
     q = db.PaperDB.select()
     papers = pd.DataFrame(list(q.dicts()))
