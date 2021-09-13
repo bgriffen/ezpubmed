@@ -173,6 +173,8 @@ Under the hood, a NLP model is used from scispacy. Some details as follows:
 # en_ner_bionlp13cg_md ^ trained on the BIONLP13CG corpus (Pyysalo et al., 2015).
 ```
 
+A basic weekly/montly recommendation system is in development and will be made available soon.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
