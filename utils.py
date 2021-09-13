@@ -9,8 +9,10 @@ import spacy
 import glob
 import numpy as np
 import datetime
+import json
 
 today = datetime.date.today()
+
 
 def intersection(lst1, lst2):
     return list(set(lst1) & set(lst2))
@@ -21,14 +23,8 @@ def difference(li1, li2):
 def nonoverlap(a,b):
     return list(set(a) ^ set(b))
 
-
 def get_list_of_xml_files(xml_path):
     return sorted(pubmed_parser.list_xml_path(xml_path))
-
-def load_year(year):
-    print("Loading:",year)
-    papers = pd.read_parquet(config.data_path+"by_year/papers/%s.parq"%str(year))
-    return papers 
 
 def has_internet(website="www.gmail.com"):
 
