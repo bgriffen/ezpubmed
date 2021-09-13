@@ -5,19 +5,19 @@ today = datetime.date.today()
 
 def load_today(db):
     q = db.PaperDB.select().where(db.PaperDB.pubdate==today)
-    df = pd.DataFrame(list(z.dicts()))
+    df = pd.DataFrame(list(q.dicts()))
     return df
 
 def load_this_week(db):
     delta = today - datetime.timedelta(days=8)
     q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
-    df = pd.DataFrame(list(z.dicts()))
+    df = pd.DataFrame(list(q.dicts()))
     return df
 
 def load_this_month(db):
     delta = today - datetime.timedelta(days=31)
     q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
-    df = pd.DataFrame(list(z.dicts()))
+    df = pd.DataFrame(list(q.dicts()))
     return df
 
 def load_year(db,year):
@@ -26,14 +26,14 @@ def load_year(db,year):
     return papers
 
 def load_between_years(db,y1,y2):
-    z = db.PaperDB.select().where(db.PaperDB.pubyear.between(y1,y2))
-    df = list(z.dicts())
+    q = db.PaperDB.select().where(db.PaperDB.pubyear.between(y1,y2))
+    df = list(q.dicts())
     return df
 
 def load_all(db):
     q = db.PaperDB.select()
-    papers = pd.DataFrame(list(q.dicts()))
-    return papers
+    df = pd.DataFrame(list(q.dicts()))
+    return df
 
 def check_first_last_affiliation(row,string_contains):
     if string_contains in row[0] or string_contains in row[-1]:
