@@ -143,12 +143,22 @@ Note: `pubyear`,`pubmonth`,`pubday` are built in extensions of `pubdate` that ar
 
 ### NLP
 
-Note: work in progress.
+If you use Zotero to manage your papers, you can generate a latent space embedding using the following:
 
 ```python
-import scispacy
-import spacy
+# load zotero papers
+dfz = utils_nlp.initialize_zotero_library("papers.json")
 
+# generate vectors from titles + abstracts (see below for details)
+dfv = utils_nlp.generate_zotero_embeddings(df,model='en_ner_bionlp13cg_md')
+
+# generate reduced embedding
+embedding = utils_nlp.calculate_embedding(dfv)
+```
+
+Under the hood, a NLP model is used from scispacy. Some details as follows:
+
+```python
 # Trained models available here: https://allenai.github.io/scispacy/
 
 # en_core_sci_sm       A full spaCy pipeline for biomedical data.
@@ -159,11 +169,6 @@ import spacy
 # en_ner_jnlpba_md     ^ trained on the JNLPBA corpus(Collierand  Kim,  2004).
 # en_ner_bc5cdr_md     ^ trained on the BC5CDR corpus (Li  et  al.,2016).
 # en_ner_bionlp13cg_md ^ trained on the BIONLP13CG corpus (Pyysalo et al., 2015).
-
-nlp = spacy.load('en_ner_bionlp13cg_md')
-
-# More coming soon...
-
 ```
 
 ## License

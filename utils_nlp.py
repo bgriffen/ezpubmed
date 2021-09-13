@@ -17,7 +17,7 @@ def cosine_similarity(vec,df):
     denom = np.linalg.norm(vec1)*vec2norm
     cs = dotprocuts/denom
     return cs
-    
+
 def calculate_embedding(dfv):
     umapp = umap.UMAP()
     embedding = umapp.fit_transform(dfv)
@@ -48,8 +48,8 @@ def get_zotero_pmids(zotero_df):
     pmdids = np.array(pmdids,dtype='int64')
     return pmdids
 
-def generate_zotero_embeddings(library_df):
-    nlp = spacy.load('en_ner_bionlp13cg_md')
+def generate_zotero_embeddings(library_df,model='en_ner_bionlp13cg_md'):
+    nlp = spacy.load(model)
     vecs = np.zeros((library_df.shape[0],200))
     library_vectors = pd.DataFrame(vecs,index=library_df.index)
     print("Combining titles and abstracts...")
