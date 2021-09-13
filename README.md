@@ -148,7 +148,7 @@ If you use Zotero to manage your papers, you can generate a latent space embeddi
 ```python
 import utils_nlp
 
-# load zotero papers
+# load zotero papers (be sure to add your zotero library_path in config.py)
 dfz = utils_nlp.initialize_zotero_library("papers.json")
 
 # generate vectors from titles + abstracts (see below for details)
@@ -158,7 +158,7 @@ dfv = utils_nlp.generate_zotero_embeddings(dfz,model='en_ner_bionlp13cg_md')
 embedding = utils_nlp.calculate_embedding(dfv)
 ```
 
-Under the hood, a NLP model is used from scispacy. Some details as follows:
+Under the hood, a NLP model is used from [SciSpacy](https://allenai.github.io/scispacy/). Some details as follows:
 
 ```python
 # Trained models available here: https://allenai.github.io/scispacy/
