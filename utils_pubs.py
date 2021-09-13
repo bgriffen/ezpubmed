@@ -9,13 +9,13 @@ def load_today(db):
     return df
 
 def load_this_week(db):
-    delta = today - datetime.timedelta(days=8)
+    delta = (today+datetime.timedelta(days=1)) - datetime.timedelta(days=8)
     q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
     df = pd.DataFrame(list(q.dicts()))
     return df
 
 def load_this_month(db):
-    delta = today - datetime.timedelta(days=31)
+    delta = (today+datetime.timedelta(days=1)) - datetime.timedelta(days=31)
     q = db.PaperDB.select().where(db.PaperDB.pubdate.between(delta,today))
     df = pd.DataFrame(list(q.dicts()))
     return df
