@@ -150,7 +150,7 @@ If you use Zotero to manage your papers, you can generate a latent space embeddi
 dfz = utils_nlp.initialize_zotero_library("papers.json")
 
 # generate vectors from titles + abstracts (see below for details)
-dfv = utils_nlp.generate_zotero_embeddings(df,model='en_ner_bionlp13cg_md')
+dfv = utils_nlp.generate_zotero_embeddings(dfz,model='en_ner_bionlp13cg_md')
 
 # generate reduced embedding
 embedding = utils_nlp.calculate_embedding(dfv)
