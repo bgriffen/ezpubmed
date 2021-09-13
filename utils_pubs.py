@@ -26,11 +26,11 @@ def load_year(db,year):
     papers = pd.DataFrame(list(q.dicts()))
     return papers
 
-load between_years(db,y1,y2):
+def load_between_years(db,y1,y2):
     z = db.PaperDB.select().where(db.PaperDB.pubyear.between(y1,y2))
     df = list(z.dicts())
     return df
-    
+
 def load_all(db):
     q = db.PaperDB.select()
     papers = pd.DataFrame(list(q.dicts()))
