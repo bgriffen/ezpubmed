@@ -158,7 +158,7 @@ dfv = utils_nlp.generate_zotero_embeddings(dfz,model='en_ner_bionlp13cg_md')
 embedding = utils_nlp.calculate_embedding(dfv)
 ```
 
-Under the hood, a NLP model is used from [SciSpacy](https://allenai.github.io/scispacy/). Some details as follows:
+Under the hood, a NLP model is used from [scispaCy](https://allenai.github.io/scispacy/). scispaCy is a Python package containing spaCy models for processing biomedical, scientific or clinical text. Some details as follows:
 
 ```python
 # Trained models available here: https://allenai.github.io/scispacy/
