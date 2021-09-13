@@ -11,11 +11,18 @@ import json
 
 import umap
 
+def cosine_similarity(vec,df):
+    dotprocuts = df.dot(vec)
+    vec2norm = df.apply(np.linalg.norm,axis=1)
+    denom = np.linalg.norm(vec1)*vec2norm
+    cs = dotprocuts/denom
+    return cs
+    
 def calculate_embedding(dfv):
     umapp = umap.UMAP()
     embedding = umapp.fit_transform(dfv)
     return embedding
-    
+
 def normalize_fn(comment, nlp, lowercase=True, remove_stopwords=True):
     #stops = stopwords.words("english")
     comment = str(comment)
