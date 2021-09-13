@@ -146,6 +146,8 @@ Note: `pubyear`,`pubmonth`,`pubday` are built in extensions of `pubdate` that ar
 If you use Zotero to manage your papers, you can generate a latent space embedding using the following:
 
 ```python
+import utils_nlp
+
 # load zotero papers
 dfz = utils_nlp.initialize_zotero_library("papers.json")
 
